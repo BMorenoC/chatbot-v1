@@ -48,7 +48,7 @@ Sigue estos pasos para levantar el entorno completo:
 ### 1. Clonar y preparar
 
 ```bash
-git clone <URL_DE_TU_REPO>
+git clone https://github.com/BMorenoC/chatbot-v1.git
 cd chatbot-v1
 ```
 
