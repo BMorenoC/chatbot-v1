@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot IA - Prueba Técnica</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <h3 class="chat-title">Asistente Virtual</h3>
+      <div class="chat-box" id="chatBox">
+        <div class="message bot">
+          Hola, soy tu asistente IA. ¿En qué puedo ayudarte hoy?
+        </div>
+      </div>
+      <div class="loading" id="loadingIndicator">Escribiendo...</div>
+      <div class="input-area">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Escribe tu mensaje..."
+          autocomplete="off"
+        />
+        <button onclick="sendMessage()" id="sendBtn">Enviar</button>
+      </div>
+    </div>
+
+    <script src="chat.js" defer></script>
+  </body>
+</html>
