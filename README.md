@@ -11,10 +11,12 @@ Este proyecto es una implementación técnica de un Chatbot Inteligente utilizan
   - [Instalación y Despliegue](#instalación-y-despliegue)
     - [1. Clonar y preparar](#1-clonar-y-preparar)
     - [2. Levantar la Infraestructura (n8n)](#2-levantar-la-infraestructura-n8n)
-    - [3. Iniciar la Aplicación (Backend + Frontend)](#3-iniciar-la-aplicación-backend--frontend)
+    - [3. Configurar Variables de Entorno](#3-configurar-variables-de-entorno)
+    - [4. Iniciar la Aplicación (Backend + Frontend)](#4-iniciar-la-aplicación-backend--frontend)
   - [configurar n8n](#configurar-n8n)
-    - [1. Configurar Credenciales:](#1-configurar-credenciales)
-    - [2. Activar el flujo:](#2-activar-el-flujo)
+    - [1. Importar el Flujo](#1-importar-el-flujo)
+    - [2. Configurar Credenciales](#2-configurar-credenciales)
+    - [3. Activar el flujo](#3-activar-el-flujo)
   - [Probar](#probar)
   - [Notas Adicionales](#notas-adicionales)
 
@@ -48,22 +50,39 @@ Sigue estos pasos para levantar el entorno completo:
 ### 1. Clonar y preparar
 
 ```bash
-git clone <URL_DE_TU_REPO>
+git clone <URL_DE_TU_REPOSITORIO>
 cd chatbot-v1
 ```
+
+---
 
 ### 2. Levantar la Infraestructura (n8n)
 
 ```bash
-docker-compose up -d #solo si se quiere activar el servicio de n8n por terminal iniciando en el puerto 5678
+docker-compose up -d #solo si se quiere activar el servicio de n8n por terminal
 ```
 
-### 3. Iniciar la Aplicación (Backend + Frontend)
+---
+
+### 3. Configurar Variables de Entorno
+
+Navegar a la carpeta de la aplicación y crear tu archivo de configuración local
+
+```bash
+cd chatbot-app
+cp .env.example .env
+```
+
+(Opcional) Abre el archivo .env creado si necesitas ajustar el puerto o la URL del webhook manualmente.
+
+---
+
+### 4. Iniciar la Aplicación (Backend + Frontend)
 
 ```bash
 cd chatbot-app
 npm install
-npm run start:dev ##El servidor iniciará en el puerto 3000
+npm run start:dev ##El servidor iniciará
 ```
 
 ---
@@ -72,19 +91,21 @@ npm run start:dev ##El servidor iniciará en el puerto 3000
 
 Para que el chatbot responda, necesitas cargar su lógica:
 
+### 1. Importar el Flujo
+
 - Acceder a http://localhost:5678.
-- Ir a Workflows > Import from File.
+- Ver a Workflows > Import from File.
 - Seleccionar el archivo n8n-chat-agent.json ubicado en la carpeta /docs de este proyecto.
 
-### 1. Configurar Credenciales:
+### 2. Configurar Credenciales
 
-Hacer clic en el nodo OpenAI Chat Model.
+- Dentro del flujo, hacer doble clic en el nodo OpenAI Chat Model.
+- En "Credential", seleccionar "Create New" y pega tu API Key de OpenAI.
 
-- Crear una nueva credencial (Credential) y pega tu API Key de OpenAI.
+### 3. Activar el flujo
 
-### 2. Activar el flujo:
-
-- Haz clic en el botón "Publish" (o interruptor "Inactive/Active") en la esquina superior derecha hasta que esté en Verde (Active).
+- Hacer clic en el botón "Publish" (o el interruptor "Inactive") en la esquina superior derecha.
+- Asegurarse de que quede en Verde (Active).
 
 ---
 

@@ -1,5 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 
 // 1. Definimos el contrato: ¿Qué nos devuelve n8n?
@@ -9,11 +10,14 @@ export interface AiResponse {
 
 @Injectable()
 export class AppService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private configService: ConfigService,
+  ) {}
 
   // 2. Cambiamos Promise<any> por Promise<AiResponse>
   async sendMessageToN8N(message: string): Promise<AiResponse> {
-    const n8nWebhookUrl = 'http://localhost:5678/webhook/chat';
+    const n8nWebhookUrl = this.configService.get<string>('N8N_WEBHOOK_URL');
 
     try {
       const payload = { message: message };

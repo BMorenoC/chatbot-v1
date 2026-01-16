@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["estáticamente", "langchain", "orquestador", "Orquestador"]
+  "cSpell.words": [
+    "classpath",
+    "dotenv",
+    "estáticamente",
+    "langchain",
+    "orquestador",
+    "Orquestador",
+    "pids",
+    "tipada"
+  ]
 }
