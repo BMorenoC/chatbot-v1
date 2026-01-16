@@ -15,12 +15,22 @@ export class AppService {
     private configService: ConfigService,
   ) {}
 
-  // 2. Cambiamos Promise<any> por Promise<AiResponse>
-  async sendMessageToN8N(message: string): Promise<AiResponse> {
-    const n8nWebhookUrl = this.configService.get<string>('N8N_WEBHOOK_URL');
+  // ✅ CORRECCIÓN 1: Agregamos "sessionId" como segundo argumento opcional (?)
+  async sendMessageToN8N(
+    message: string,
+    sessionId?: string,
+  ): Promise<AiResponse> {
+    // Leemos la URL (y agregamos un fallback por seguridad)
+    const n8nWebhookUrl =
+      this.configService.get<string>('N8N_WEBHOOK_URL') ||
+      'http://localhost:5678/webhook/chat';
 
     try {
-      const payload = { message: message };
+      // ✅ CORRECCIÓN 2: Incluimos el sessionId en el paquete para n8n
+      const payload = {
+        message: message,
+        sessionId: sessionId || 'anonimo', // Si es undefined, mandamos 'anonimo'
+      };
 
       const response = await firstValueFrom(
         // Indicamos a axios que esperamos un objeto tipo AiResponse

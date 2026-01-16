@@ -3,6 +3,19 @@ const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 const loadingIndicator = document.getElementById('loadingIndicator');
 
+// 1. GESTIÓN DE LA SESIÓN (NUEVO)
+// Intentamos recuperar un ID existente. Si no hay, creamos uno nuevo.
+let sessionId = localStorage.getItem('chatSessionId');
+
+if (!sessionId) {
+  // Generamos un ID aleatorio (ej: "x9as8d7f")
+  sessionId = Math.random().toString(36).substring(2, 15);
+  localStorage.setItem('chatSessionId', sessionId);
+  console.log('Nueva sesión creada:', sessionId);
+} else {
+  console.log('Sesión recuperada:', sessionId);
+}
+
 // Permitir enviar con Enter
 userInput.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
