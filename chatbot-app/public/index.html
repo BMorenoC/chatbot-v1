@@ -3,27 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chatbot IA - Prueba Técnica</title>
+    <title>ChatBot Nomed World of Warcraft</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <video autoplay muted loop id="bg-video">
+      <source src="assets/video/wotlk_login.mp4" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+
+    <audio id="audioLogin" src="assets/audio/login_music.mp3" loop></audio>
+
     <div class="chat-container">
-      <h3 class="chat-title">Asistente Virtual</h3>
+      <div class="wow-title-container">
+        <img
+          src="assets/images/nomed-version-exanime.png"
+          alt="WoW Logo"
+          class="title-icon"
+        />
+
+        <span class="wow-text">Nomed</span>
+      </div>
+
       <div class="chat-box" id="chatBox">
         <div class="message bot">
-          Hola, soy tu asistente IA. ¿En qué puedo ayudarte hoy?
+          Saludos, mortal. La Plaga avanza... ¿qué deseas saber?
         </div>
       </div>
-      <div class="loading" id="loadingIndicator">Escribiendo...</div>
+
+      <div class="loading" id="loadingIndicator">Invocando respuesta...</div>
+
       <div class="input-area">
         <input
           type="text"
           id="userInput"
-          placeholder="Escribe tu mensaje..."
+          placeholder="Escribe tu comando..."
           autocomplete="off"
         />
-        <button onclick="sendMessage()" id="sendBtn">Enviar</button>
+
+        <button onclick="sendMessage()" id="sendBtn">ENTRAR</button>
       </div>
+    </div>
+
+    <div class="wow-volume-panel">
+      <button
+        id="muteBtn"
+        class="mute-toggle-btn"
+        title="Activar/Desactivar Sonido"
+      >
+        🔇 SONIDO OFF
+      </button>
+
+      <div class="volume-label">VOLUMEN MAESTRO</div>
+      <input
+        type="range"
+        id="volumeSlider"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.4"
+        title="Ajusta el volumen maestro"
+      />
     </div>
 
     <script src="chat.js" defer></script>

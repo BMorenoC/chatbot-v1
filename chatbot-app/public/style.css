@@ -1,80 +1,292 @@
+/* --- 1. IMPORTAR FUENTE WOW --- */
+@font-face {
+  font-family: 'LifeCraft';
+  src: url('assets/fonts/lifecraft.ttf') format('truetype');
+}
+
+/* --- 2. VIDEO DE FONDO --- */
+#bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1; /* Al fondo */
+  object-fit: cover;
+  background-color: #000; /* Respaldo negro */
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
+
+/* --- 3. CONTENEDOR PRINCIPAL --- */
 .chat-container {
-  width: 400px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 550px;
+  height: 600px;
+
+  /* Fondo oscuro semitransparente */
+  background: rgba(0, 0, 0, 0.65);
+
+  /* Efecto Cristal (Blur) */
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+
+  /* Borde Doble Blizzard */
+  border: 2px solid #4a4a4a;
+  box-shadow:
+    0 0 0 1px #000,
+    0 0 30px rgba(0, 162, 255, 0.15); /* Resplandor azul sutil */
+
+  border-radius: 6px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  height: 500px;
 }
+
+/* --- TÍTULO Y LOGO (Contenedor Flexible) --- */
+.wow-title-container {
+  display: flex; /* Activa el modo flexible */
+  justify-content: center; /* Centra todo horizontalmente */
+  align-items: center; /* Centra verticalmente (alinea logo con texto) */
+  gap: 20px; /* Espacio entre el logo y el texto */
+  margin-bottom: 15px;
+}
+
+/* 1. Configuración de la IMAGEN */
+.title-icon {
+  height: 120px; /* <--- CAMBIA ESTO PARA AGRANDAR O ACHICAR EL LOGO */
+  width: auto; /* Mantiene la proporción */
+  filter: drop-shadow(
+    0 2px 5px rgba(0, 0, 0, 0.8)
+  ); /* Sombra para que resalte */
+}
+
+/* 2. Configuración del TEXTO */
+.wow-text {
+  font-family: 'LifeCraft', serif;
+  color: #ffd100; /* Dorado */
+  font-size: 4.5rem;
+  text-shadow: 0 4px 4px #000;
+  letter-spacing: 2px;
+  /* Ya no necesitamos text-align center aquí porque el contenedor lo hace */
+}
+
+/* --- ÁREA DE CHAT --- */
 .chat-box {
   flex: 1;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: #fafafa;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: inset 0 0 15px #000;
+  border-radius: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #222;
 }
+
 .message {
-  margin: 5px 0;
+  margin: 10px 0;
   padding: 8px 12px;
-  border-radius: 15px;
-  max-width: 80%;
-  font-size: 14px;
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  text-shadow: 1px 1px 1px #000;
 }
+
 .user {
-  background-color: #007bff;
-  color: white;
-  align-self: flex-end;
-  margin-left: auto;
+  color: #ffb0b0; /* Texto Usuario (Rosado/Rojo suave) */
   text-align: right;
+  border-right: 2px solid #8a1816;
+  background: linear-gradient(to left, rgba(138, 24, 22, 0.1), transparent);
 }
+
 .bot {
-  background-color: #e9ecef;
-  color: #333;
-  align-self: flex-start;
+  color: #ffd100; /* Texto Bot (Dorado NPC) */
+  text-align: left;
+  border-left: 2px solid #ffd100;
+  background: linear-gradient(to right, rgba(255, 209, 0, 0.1), transparent);
 }
+
+.loading {
+  color: #888;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* --- INPUTS --- */
 .input-area {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
 }
-input {
+
+input[type='text'] {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 12px;
+  background-color: #0a0a0a;
+  border: 1px solid #555;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+  outline: none;
+  border-radius: 3px;
+}
+
+input[type='text']:focus {
+  border-color: #ffd100;
+}
+
+/* --- 4. BOTÓN DE LOGIN (ROJO BLIZZARD) --- */
+#sendBtn {
+  font-family: 'LifeCraft', serif; /* O la fuente normal en negrita */
+  font-size: 20px;
+  color: #fcd000;
+  text-shadow: 1px 1px 0 #000;
+  text-transform: uppercase;
+  padding: 8px 30px;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #8a1816 0%, #520605 100%);
+  border: 2px solid #7a7a7a;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 4px #000;
+  transition: all 0.2s;
+}
+
+#sendBtn:hover {
+  background: linear-gradient(to bottom, #a82420 0%, #6e0d0b 100%);
+  color: #fff;
+  border-color: #ffd100;
+  box-shadow: 0 0 15px rgba(255, 40, 40, 0.4);
+}
+
+#sendBtn:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 10px #000;
+}
+
+#sendBtn:disabled {
+  filter: grayscale(100%);
+  cursor: wait;
+}
+
+/* --- 5. PANEL DE VOLUMEN --- */
+.wow-volume-panel {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #4a4a4a;
+  padding: 15px;
   border-radius: 5px;
+  text-align: center;
+  z-index: 100;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 10px #000;
+}
+
+.volume-label {
+  color: #ffd100;
+  font-size: 12px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Slider Personalizado */
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type='range']:focus {
   outline: none;
 }
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+
+/* Riel del slider */
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
   cursor: pointer;
+  background: #111;
+  border: 1px solid #555;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Botón del slider (Thumb) */
+input[type='range']::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffeb3 0%, #ffd100 40%, #a37b00 100%);
+  border: 1px solid #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+  box-shadow: 0 0 8px rgba(255, 209, 0, 0.6);
+}
+
+/* --- BOTÓN TOGGLE DE SONIDO (MUTE/UNMUTE) --- */
+.mute-toggle-btn {
+  width: 100%;
+  /* Estado por defecto: ROJO (Silenciado) */
+  background: linear-gradient(to bottom, #8a1816 0%, #520605 100%);
+  border: 1px solid #ffd100;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
   font-weight: bold;
+  text-transform: uppercase;
+  padding: 6px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s;
+
+  /* IMPORTANTE: display block para que siempre esté visible */
+  display: block;
 }
-button:hover {
-  background-color: #0056b3;
+
+/* Clase extra para cuando el sonido está ACTIVO (Verde) */
+.sound-active {
+  background: linear-gradient(
+    to bottom,
+    #188a16 0%,
+    #055206 100%
+  ) !important; /* Verde WoW */
+  border-color: #4aff4a;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
 }
-button:disabled {
-  background-color: #ccc;
+
+/* Animación SOLO cuando está muteado (Clase .pulsing) */
+.pulsing {
+  animation: pulse-red 2s infinite;
 }
-.loading {
-  font-style: italic;
-  color: #888;
-  font-size: 12px;
-  margin-left: 5px;
-  display: none;
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
 }
