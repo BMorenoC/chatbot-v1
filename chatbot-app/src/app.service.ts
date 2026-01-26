@@ -15,7 +15,6 @@ export class AppService {
     private configService: ConfigService,
   ) {}
 
-  // ✅ CORRECCIÓN 1: Agregamos "sessionId" como segundo argumento opcional (?)
   async sendMessageToN8N(
     message: string,
     sessionId?: string,
@@ -26,7 +25,7 @@ export class AppService {
       'http://localhost:5678/webhook/chat';
 
     try {
-      // ✅ CORRECCIÓN 2: Incluimos el sessionId en el paquete para n8n
+      // SessionId en el paquete para n8n
       const payload = {
         message: message,
         sessionId: sessionId || 'anonimo', // Si es undefined, mandamos 'anonimo'

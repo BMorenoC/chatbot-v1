@@ -8,15 +8,15 @@ import { ConfigModule } from '@nestjs/config'; // ✅ 1. Importar el módulo de 
 
 @Module({
   imports: [
-    // ✅ 2. Activar la configuración (leer el .env)
+    // 2. Activar la configuración (leer el .env)
     ConfigModule.forRoot({
       isGlobal: true, // Esto hace que esté disponible para el AppService sin importarlo de nuevo
     }),
 
-    // 3. Configuramos HTTP para poder "llamar" a n8n
+    // 3. Configura HTTP para poder llamar a n8n
     HttpModule,
 
-    // 4. Configuramos la carpeta pública para servir el HTML
+    // 4. Configura la carpeta pública para servir el HTML
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),

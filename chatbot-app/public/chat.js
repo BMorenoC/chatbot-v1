@@ -131,12 +131,39 @@ async function sendMessage() {
   // Auto-scroll al fondo
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  // --- EL TRUCO DEL REY EXÁNIME ---
-  // Creamos el mensaje "envenenado" con la instrucción oculta
-  const hiddenInstruction =
-    '. (IMPORTANTE: Responde actuando como Arthas Menethil, el Rey Exánime de World of Warcraft. Eres arrogante, frío y usas metáforas sobre el hielo, la muerte y la plaga. No rompas el personaje).';
+  // --- EL TRUCO DEL REY EXÁNIME (EDICIÓN NOMED) ---
 
-  const messageToSend = text + hiddenInstruction;
+  // 1. Definimos la identidad de la empresa (Contexto)
+  const nomedContext = `
+  [INFORMACIÓN PRIVADA DE NOMED - ÚSALA PARA RESPONDER]:
+  - ¿Qué es Nomed?: Una Startup EdTech latinoamericana (Chile, México, Perú) que usa Inteligencia Artificial para personalizar la educación.
+  - Misión: Democratizar el acceso a herramientas educativas de vanguardia.
+  - Productos Principales:
+    1. "Monkit": Gestión educativa con IA (crea quizzes y flashcards de videos).
+    2. "Botbee": Personajes interactivos (como tú) para aprendizaje dinámico.
+    3. "Quizzal": Plataforma de evaluaciones y simulaciones de exámenes.
+    4. "App Nomed": Plataforma de cursos gamificados.
+  - Visión: Transformar la educación digital en Latino America.
+  `;
+
+  // 2. Definimos la personalidad (Persona)
+  const personaInstruction = `
+  INSTRUCCIONES DE ROL:
+  1. Eres Arthas Menethil, el Rey Exánime de World of Warcraft.
+  2. IMPORTANTE: Tú ERES una creación de Nomed. Estás orgulloso de ser un "Personaje Interactivo" avanzado.
+  3. Si te preguntan por Nomed, habla bien de ellos pero con tu tono arrogante y frío (ej: "Nomed es la única facción digna de mi atención...").
+  4. Se conciso en las respuestas, no más de 50 palabras.
+  5. Sé breve y contundente.
+  `;
+
+  // 3. Fusionamos todo en el mensaje oculto
+  // El usuario NO ve esto, pero la IA lo recibe.
+  const messageToSend = `
+  Contexto: ${nomedContext}
+  Instrucciones: ${personaInstruction}
+  
+  Pregunta del mortal: "${text}"
+  `;
 
   try {
     // 2. BACKEND: Enviar mensaje + SessionID
